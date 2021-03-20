@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Ampel</title>
+<link rel="stylesheet" href="Ampel.css">
+</head>
+<body>
+
+    <div class="slidecontainer">
+        <input type="range" min="0" max="255" value="128" class="slider" id="myRangeR">
+    </div>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="255" value="128" class="slider" id="myRangeG">
+    </div>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="255" value="128" class="slider" id="myRangeB">
+    </div>
+
+    <script>
+        var plusr = document.querySelector('.plusr'),
+            value = document.querySelector('.value'),
+            users = document.querySelector('.users'),
+            websocket = new WebSocket("ws://192.168.188.24:666/");
+
+
+        var slider = document.getElementById("myRangeR");
+        slider.oninput = function() {
+            websocket.send(JSON.stringify({action: this.value}));
+        } 
+        var slider = document.getElementById("myRangeG");
+        slider.oninput = function() {
+            websocket.send(JSON.stringify({action: this.value}));
+        } 
+        var slider = document.getElementById("myRangeB");
+        slider.oninput = function() {
+            websocket.send(JSON.stringify({action: this.value}));
+        } 
+        websocket.onmessage = function (event) {
+            data = JSON.parse(event.data);
+            switch (data.type) {
+                case 'state':
+                    value.textContent = data.value;
+                    break;
+                case 'users':
+                    users.textContent = (
+                        data.count.toString() + " user" +
+                        (data.count == 1 ? "" : "s"));
+                    break;
+                default:
+                    console.error(
+                        "unsupported event", data);
+            }
+        };
+    </script>
+</body>
+</html>
