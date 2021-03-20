@@ -24,15 +24,15 @@
 
         var slider = document.getElementById("myRangeR");
         slider.oninput = function() {
-            websocket.send(JSON.stringify({action: this.value}));
+            websocket.send(JSON.stringify({action: "R" +this.value}));
         } 
         var slider = document.getElementById("myRangeG");
         slider.oninput = function() {
-            websocket.send(JSON.stringify({action: this.value}));
+            websocket.send(JSON.stringify({action: "G" + this.value}));
         } 
         var slider = document.getElementById("myRangeB");
         slider.oninput = function() {
-            websocket.send(JSON.stringify({action: this.value}));
+            websocket.send(JSON.stringify({action: "B" + this.value}));
         } 
         websocket.onmessage = function (event) {
             data = JSON.parse(event.data);

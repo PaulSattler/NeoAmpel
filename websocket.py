@@ -12,7 +12,7 @@ num_pixels = 180
 ORDER = neopixel.GRB
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=1, auto_write=False, pixel_order=ORDER) #auto write ändern
 logging.basicConfig()
-STATE = {"valuer": 0, "valueg" : 0, "valueb" : 0, "valueh" : 0}
+STATE = {"valuer": 0, "valueg" : 0, "valueb" : 0}
 USERS = set()
 colorr = 0
 colorg = 0
@@ -52,36 +52,24 @@ async def counter(websocket, path):
         await websocket.send(state_event())
         async for message in websocket:
             data = json.loads(message)
-            if data["action"] == "dunkel":
-                STATE["valueh"] -= 1
+            if "R" in data["action"]:
+                x = data["action"]
+                STATE["valuer"] = x[1:]
                 await notify_state()
-            elif data["action"] == "hell":
-                STATE["valueh"] += 1
+            elif "G" in data["action"]:
+                x = data["action"]
+                STATE["valueg"] = x[1:]
                 await notify_state()
-            elif data["action"] == "plusr":
-                STATE["valuer"] += 1
-                await notify_state()
-            elif data["action"] == "minusr":
-                STATE["valuer"] -= 1
-                await notify_state()  
-            elif data["action"] == "plusg":
-                STATE["valueg"] += 1
-                await notify_state()
-            elif data["action"] == "minusg":
-                STATE["valueg"] -= 1
-                await notify_state()
-            elif data["action"] == "plusb":
-                STATE["valueb"] += 1
-                await notify_state()
-            elif data["action"] == "minusb":
-                STATE["valueb"] -= 1
+            elif "B" in data["action"]:
+                x = data["action"]
+                STATE["valueb"] = x[1:]
                 await notify_state()
             else:
                 logging.error("unsupported event: {}", data)
             #print(STATE["value"])
-            colorr = ledchecker(STATE["valuer"])
-            colorg = ledchecker(STATE["valueg"])
-            colorb = ledchecker(STATE["valueb"])
+            colorr = ledchecker(int(STATE["valuer"]))
+            colorg = ledchecker(int(STATE["valueg"]))
+            colorb = ledchecker(int(STATE["valueb"]))
             pixels.fill((colorr, colorg, colorb))
             pixels.show()
     finally:
