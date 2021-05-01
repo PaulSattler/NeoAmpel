@@ -1,6 +1,11 @@
 .slidecontainer {
     width: 100%; /* Width of the outside container */
   }
+
+.RainbowButton {
+  width: 100%;
+  border-radius: 8px;
+}
   
   /* The slider itself */
   .slider {

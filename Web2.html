@@ -14,7 +14,9 @@
     <div class="slidecontainer">
         <input type="range" min="0" max="255" value="128" class="slider" id="myRangeB">
     </div>
-
+    <div class="RainbowButton"> 
+        <button type="button" id="RainbowButton">Rainbow</button>
+    </div>
     <script>
         var plusr = document.querySelector('.plusr'),
             value = document.querySelector('.value'),
@@ -24,16 +26,20 @@
 
         var slider = document.getElementById("myRangeR");
         slider.oninput = function() {
-            websocket.send(JSON.stringify({action: "R" +this.value}));
+            websocket.send(JSON.stringify({action: 'R' + this.value}));
         } 
         var slider = document.getElementById("myRangeG");
         slider.oninput = function() {
-            websocket.send(JSON.stringify({action: "G" + this.value}));
+            websocket.send(JSON.stringify({action: 'G' + this.value}));
         } 
         var slider = document.getElementById("myRangeB");
         slider.oninput = function() {
-            websocket.send(JSON.stringify({action: "B" + this.value}));
+            websocket.send(JSON.stringify({action: 'B' + this.value}));
         } 
+        var button = document.getElementById("RainbowButton");
+        button.onclick = function() {
+            websocket.send(JSON.stringify({action: 'Rainbow'}));
+        }
         websocket.onmessage = function (event) {
             data = JSON.parse(event.data);
             switch (data.type) {
