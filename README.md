@@ -29,3 +29,6 @@ sudo service apache[2] restart
 #Example: IP:192.168.188.24 Port:666
 
 #Setup GPIO pins. 
+#GRND eq PIN6 
+#DATA eq PIN12
+#connect RASPI GRND to Supply GRND
