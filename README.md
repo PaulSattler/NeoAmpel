@@ -1,9 +1,13 @@
 # NeoAmpel Paul Sattler
+
 #Eine Ampel mit NeoPixel, Python, Kotlin und JS
 
 #setup start on boot
+
 #set raspi-config 3Boot Options B1 Desktop/CLI B2 Console Autologin
+
 #bash
+
 sudo nano /etc/rc.local
 #end bash
 #edit file
