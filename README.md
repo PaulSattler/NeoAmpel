@@ -26,6 +26,7 @@ sudo service apache[2] restart
 
 #edit ip & port in index.html -> Server ip! IP must be static. 
 #edit ip & port in websocket.py -> Server ip! IP must be static.
+#edit ip & port in Android apk. MainAktivit.kt
 #Example: IP:192.168.188.24 Port:666
 
 #Setup GPIO pins. 
