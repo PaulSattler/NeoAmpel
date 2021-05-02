@@ -126,7 +126,7 @@ async def counter(websocket, path):
             elif "T" in data["action"]:
                 x = data["action"]
                 STATE["time"] = int(x[1:]) / 100000
-                print(STATE["time"])
+                #print(STATE["time"])
             else:
                 logging.error("unsupported event: {}", data)
             #print(STATE["value"])
