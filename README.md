@@ -22,7 +22,7 @@ sleep 10
 
 (sudo) python[2/3] /path/websocket.py & 
 
-#& <- for loop programms              ^
+#& <- for loop programms              
 
 exit 0
 
